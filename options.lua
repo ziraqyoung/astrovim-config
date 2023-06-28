@@ -7,6 +7,12 @@ return {
     spell = false, -- sets vim.opt.spell
     signcolumn = "auto", -- sets vim.opt.signcolumn to auto
     wrap = false, -- sets vim.opt.wrap
+    guicursor = "i:block", --  set cursor of insert mode as block.
+    
+    foldcolumn = '1', -- '0' is not bad
+    foldlevel = 99,   -- Using ufo provider need a large value, feel free to decrease the value
+    foldlevelstart = 99,
+    foldenable = true,
   },
   g = {
     mapleader = " ", -- sets vim.g.mapleader
