@@ -173,16 +173,24 @@ return {
       require("ror").setup({})
     end
   },
-  "tpope/vim-rails",
-  "tpope/vim-repeat",
-  "tpope/vim-endwise",
-  "tpope/vim-rake",
-  "tpope/vim-haml",
-  "sunaku/vim-ruby-minitest",
   {
     "tpope/vim-bundler",
     cmd = { "Bundler", "Bopen", "Bsplit", "Btabedit" }
   },
+  {
+    "tpope/vim-rails",
+    ft = { "ruby", "eruby" }
+  },
+  {
+    "RRethy/nvim-treesitter-endwise"
+  },
+  "tpope/vim-repeat",
+  "tpope/vim-rake",
+  {
+    "tpope/vim-haml",
+    ft = { "haml" }
+  },
+  "sunaku/vim-ruby-minitest",
   {
     "kylechui/nvim-surround",
     config = function()
