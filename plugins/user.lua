@@ -179,7 +179,19 @@ return {
   },
   {
     "tpope/vim-rails",
-    ft = { "ruby", "eruby" }
+    ft = { "ruby", "eruby" },
+    config = function()
+      -- disable autocmd set filetype=eruby.yaml
+      vim.api.nvim_create_autocmd(
+        { 'BufNewFile', 'BufReadPost' },
+        {
+          pattern = { '*.yml' },
+          callback = function()
+            vim.bo.filetype = 'yaml'
+          end
+        }
+      )
+    end
   },
   {
     "RRethy/nvim-treesitter-endwise"
