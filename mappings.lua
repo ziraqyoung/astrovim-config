@@ -29,6 +29,7 @@ return {
     ["<C-\\>"] = { "<cmd>ToggleTerm direction=float start_in_insert=true<cr>", desc = "Toggle terminal" },
     ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
     ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
+    ["<leader>go"] = { "<cmd>Telescope git_status<cr>", desc = "Open changed file" },
   },
   t = {
     -- setting a mapping to false will disable it
