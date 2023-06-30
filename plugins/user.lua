@@ -3,6 +3,24 @@ return {
   -- Add plugins, the lazy syntax
   -- "andweeb/presence.nvim",
   {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    config = function()
+      require("noice").setup({
+        lsp = {
+          hover = {
+            enabled = false
+          },
+          signature = {
+            enabled = false
+          }
+        }
+
+      })
+    end
+  },
+  {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
     config = function()

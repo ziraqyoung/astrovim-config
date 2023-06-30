@@ -30,7 +30,30 @@ return {
     ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
     ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
     ["<leader>go"] = { "<cmd>Telescope git_status<cr>", desc = "Open changed file" },
+
+    -- Useful LSP configuration
+    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Show hover" },
+    ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Goto definition" },
+    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", desc = "Goto Declaration" },
+    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", desc = "Goto references" },
+    ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", desc = "Goto Implementation" },
+    ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "show signature help" },
+    ["gl"] = {
+      function()
+        local float = vim.diagnostic.config().float
+
+        if float then
+          local config = type(float) == "table" and float or {}
+          config.scope = "line"
+
+          vim.diagnostic.open_float(config)
+        end
+      end,
+      desc = "Show line diagnostics",
+    },
   },
+
+
   t = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
