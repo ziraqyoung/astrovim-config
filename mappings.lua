@@ -8,7 +8,6 @@ return {
   n = {
     -- second key is the lefthand side of the map
     -- mappings seen under group name "Buffer"
-    ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
     ["<leader>bD"] = {
       function()
         require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)
@@ -24,11 +23,11 @@ return {
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     -- Ror Commands
-    ["<leader>rc"] = { ":lua require('ror.commands').list_commands()<CR>" },
-    ["<leader>a"] = { "<cmd>AerialToggle!<CR>" },
-    ["<C-\\>"] = { "<cmd>ToggleTerm direction=float start_in_insert=true<cr>", desc = "Toggle terminal" },
-    ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
+    ["<leader>bb"] = { "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
+    ["<leader>bn"] = { "<cmd>BufferLineCycleNext<cr>", desc = "New Buffer" },
     ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
+
+    -- Telescopr
     ["<leader>go"] = { "<cmd>Telescope git_status<cr>", desc = "Open changed file" },
 
     -- Useful LSP configuration
@@ -51,8 +50,12 @@ return {
       end,
       desc = "Show line diagnostics",
     },
-  },
 
+    -- Other PLugins
+    ["<leader>rc"] = { ":lua require('ror.commands').list_commands()<CR>" },
+    ["<leader>a"] = { "<cmd>AerialToggle!<CR>" },
+    ["<C-\\>"] = { "<cmd>ToggleTerm direction=float start_in_insert=true<cr>", desc = "Toggle terminal" },
+  },
 
   t = {
     -- setting a mapping to false will disable it
