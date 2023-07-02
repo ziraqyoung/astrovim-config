@@ -4,10 +4,15 @@ return {
   -- example of imporing a plugin, comment out to use it or add your own
   -- available plugins can be found at https://github.com/AstroNvim/astrocommunity
 
+  -- Tool packs
+  { import = "astrocommunity.pack.ruby" },
+  
+  -- Themes
   -- { import = "astrocommunity.colorscheme.catppuccin" },
   -- { import = "astrocommunity.completion.copilot-lua-cmp" },
   { import = "astrocommunity.colorscheme.kanagawa-nvim" },
-
+  
+  -- PLugins
   { import = "astrocommunity.bars-and-lines.dropbar-nvim" },
   { import = "astrocommunity.bars-and-lines.bufferline-nvim" },
   {

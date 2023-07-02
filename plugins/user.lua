@@ -212,7 +212,15 @@ return {
     end
   },
   {
-    "RRethy/nvim-treesitter-endwise"
+    "RRethy/nvim-treesitter-endwise",
+    ft = { "ruby", "eruby" },
+    config = function()
+      require('nvim-treesitter.configs').setup({
+        endwise = {
+          enable = true,
+        },
+      })
+    end
   },
   "tpope/vim-repeat",
   "tpope/vim-rake",
