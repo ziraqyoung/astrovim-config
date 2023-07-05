@@ -338,7 +338,16 @@ return {
       })
     end
   },
-  "marko-cerovac/material.nvim",
+  {
+    "marko-cerovac/material.nvim",
+    config = function()
+      require('material').setup({
+        disable = {
+          colored_cursor = true
+        }
+      })
+    end
+  },
   "AlexvZyl/nordic.nvim",
   {
     "kevinhwang91/nvim-ufo", --code folding

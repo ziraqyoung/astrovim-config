@@ -5,7 +5,7 @@ return {
   -- available plugins can be found at https://github.com/AstroNvim/astrocommunity
 
   -- Tool packs
-  { import = "astrocommunity.pack.ruby" },
+  -- { import = "astrocommunity.pack.ruby" },
   
   -- Themes
   -- { import = "astrocommunity.colorscheme.catppuccin" },
