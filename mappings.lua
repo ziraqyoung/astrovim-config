@@ -27,8 +27,9 @@ return {
     ["<leader>bn"] = { "<cmd>BufferLineCycleNext<cr>", desc = "New Buffer" },
     ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
 
-    -- Telescopr
+    -- Telescope
     ["<leader>go"] = { "<cmd>Telescope git_status<cr>", desc = "Open changed file" },
+    ["<leader>fs"] = { ":lua require('telescope.builtin').find_files({ search_dirs = {vim.fn.expand('%:p:h')} })<CR>", desc = "Find file in this buffer's working directory" },
 
     -- Useful LSP configuration
     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Show hover" },
@@ -61,5 +62,6 @@ return {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
     ["<C-\\>"] = { "<C-\\><C-n><C-w>l", desc = "Hide terminal" },
+    ["<Esc><Esc>"] = { "<C-\\><C-n>", desc = "Enter visual mode" },
   },
 }
