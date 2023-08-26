@@ -52,9 +52,22 @@ return {
       desc = "Show line diagnostics",
     },
 
+    -- Neotest
+    ["<leader>dm"] = { "<cmd>lua require('neotest').run.run()<cr>", desc = "Test Method" },
+    ["<leader>dM"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", desc = "Test Method DAP" },
+    ["<leader>df"] = { "<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>", desc = "Test Class" },
+    ["<leader>dF"] = { "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", desc = "Test Class DAP" },
+    ["<leader>dS"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Test Summary" },
+
+    -- Noice
+    ["<leader>n"] = { name = "Notifications" },
+    ["<leader>nl"] = { "<cmd>lua require('noice').cmd('last')<cr>", desc = "Show last notification" },
+    ["<leader>nh"] = { "<cmd>lua require('noice').cmd('history')<cr>", desc = "Show notification history" },
+    ["<leader>nd"] = { "<cmd>lua require('noice').cmd('dismiss')<cr>", desc = "Dismiss all visible notifications" },
+
     -- Other PLugins
     ["<leader>rc"] = { ":lua require('ror.commands').list_commands()<CR>" },
-    ["<leader>a"] = { "<cmd>AerialToggle!<CR>" },
+    ["<leader>a"] = { "<cmd>AerialToggle<CR>" },
     ["<C-\\>"] = { "<cmd>ToggleTerm direction=float start_in_insert=true<cr>", desc = "Toggle terminal" },
   },
 
@@ -62,6 +75,6 @@ return {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
     ["<C-\\>"] = { "<C-\\><C-n><C-w>l", desc = "Hide terminal" },
-    ["<Esc><Esc>"] = { "<C-\\><C-n>", desc = "Enter visual mode" },
+    ["<C-v>"] = { "<C-\\><C-n>", desc = "Enter visual mode" },
   },
 }

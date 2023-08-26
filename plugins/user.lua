@@ -65,22 +65,22 @@ return {
   "olexsmir/gopher.nvim",
   "leoluz/nvim-dap-go",
   -- Rust language
-  {
-    "saecki/crates.nvim",
-    version = "v0.3.0",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("crates").setup {
-        null_ls = {
-          enabled = true,
-          name = "crates.nvim",
-        },
-        popup = {
-          border = "rounded",
-        },
-      }
-    end,
-  },
+  -- {
+  --   "saecki/crates.nvim",
+  --   version = "v0.3.0",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   config = function()
+  --     require("crates").setup {
+  --       null_ls = {
+  --         enabled = true,
+  --         name = "crates.nvim",
+  --       },
+  --       popup = {
+  --         border = "rounded",
+  --       },
+  --     }
+  --   end,
+  -- },
   {
     "simrat39/rust-tools.nvim",
     -- ft = { "rust", "rs" }, -- IMPORTANT: re-enabling this seems to break inlay-hints
@@ -134,6 +134,9 @@ return {
     "stevearc/aerial.nvim", -- code outline
     config = function()
       require('aerial').setup({
+        layout = {
+          default_direction = "prefer_left",
+        },
         on_attach = function(bufnr)
           vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
           vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
