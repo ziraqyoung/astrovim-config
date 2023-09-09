@@ -5,7 +5,7 @@ return {
   -- available plugins can be found at https://github.com/AstroNvim/astrocommunity
 
   -- Tool packs
-  -- { import = "astrocommunity.pack.ruby" },
+  { import = "astrocommunity.pack.ruby" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.cmake" },
   { import = "astrocommunity.pack.cpp" },
@@ -26,7 +26,9 @@ return {
   -- { import = "astrocommunity.colorscheme.catppuccin" },
   -- { import = "astrocommunity.completion.copilot-lua-cmp" },
   { import = "astrocommunity.colorscheme.kanagawa-nvim" },
-  
+  -- Enhancements
+   { import = "astrocommunity.project.nvim-spectre" },
+   { import = "astrocommunity.diagnostics.trouble-nvim" },
   -- PLugins
   { import = "astrocommunity.bars-and-lines.dropbar-nvim" },
   { import = "astrocommunity.bars-and-lines.bufferline-nvim" },

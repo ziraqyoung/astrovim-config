@@ -284,10 +284,6 @@ return {
     end,
   },
   {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
-  {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
     config = function() require "lsp_signature".on_attach() end,
@@ -297,13 +293,6 @@ return {
     name = "leap",
     config = function()
       require("leap").add_default_mappings()
-    end,
-  },
-  {
-    "windwp/nvim-spectre", -- search and replace
-    event = "BufRead",
-    config = function()
-      require("spectre").setup()
     end,
   },
   {

@@ -69,6 +69,13 @@ return {
     ["<leader>rc"] = { ":lua require('ror.commands').list_commands()<CR>" },
     ["<leader>a"] = { "<cmd>AerialToggle<CR>" },
     ["<C-\\>"] = { "<cmd>ToggleTerm direction=float start_in_insert=true<cr>", desc = "Toggle terminal" },
+
+    -- Trouble (assumes <leader>x for Trouble)
+  ["<leader>xt"] = { "<cmd>TroubleToggle<cr>", desc = "Trouble" },
+  ["<leader>xr"] = { "<cmd>TroubleToggle lsp_references<cr>", desc = "LSP references" },
+  ["<leader>xd"] = { "<cmd>TroubleToggle lsp_definitions<cr>", desc = "LSP definitions" },
+  ["<leader>xT"] = { "<cmd>TroubleToggle lsp_type_definitions<cr>", desc = "LSP type definitions" },
+  ["<leader>xi"] = { "<cmd>TroubleToggle lsp_implementations<cr>", desc = "LSP implementations" },
   },
 
   t = {
