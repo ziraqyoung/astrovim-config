@@ -32,7 +32,8 @@ return {
     ["<leader>fs"] = { ":lua require('telescope.builtin').find_files({ search_dirs = {vim.fn.expand('%:p:h')} })<CR>", desc = "Find file in this buffer's working directory" },
 
     -- Useful LSP configuration
-    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Show hover" },
+    ["K"] = { "<cmd>lua require('hover').hover()<cr>", desc = "hover.nvim" },
+    ["gK"] = { "<cmd>lua require('hover').hover_select()<cr>", desc = "hover.nvim(select)" },
     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Goto definition" },
     ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", desc = "Goto Declaration" },
     ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", desc = "Goto references" },
@@ -71,11 +72,14 @@ return {
     ["<C-\\>"] = { "<cmd>ToggleTerm direction=float start_in_insert=true<cr>", desc = "Toggle terminal" },
 
     -- Trouble (assumes <leader>x for Trouble)
-  ["<leader>xt"] = { "<cmd>TroubleToggle<cr>", desc = "Trouble" },
-  ["<leader>xr"] = { "<cmd>TroubleToggle lsp_references<cr>", desc = "LSP references" },
-  ["<leader>xd"] = { "<cmd>TroubleToggle lsp_definitions<cr>", desc = "LSP definitions" },
-  ["<leader>xT"] = { "<cmd>TroubleToggle lsp_type_definitions<cr>", desc = "LSP type definitions" },
-  ["<leader>xi"] = { "<cmd>TroubleToggle lsp_implementations<cr>", desc = "LSP implementations" },
+    ["<leader>xt"] = { "<cmd>TroubleToggle<cr>", desc = "Trouble" },
+    ["<leader>xr"] = { "<cmd>TroubleToggle lsp_references<cr>", desc = "LSP references" },
+    ["<leader>xd"] = { "<cmd>TroubleToggle lsp_definitions<cr>", desc = "LSP definitions" },
+    ["<leader>xT"] = { "<cmd>TroubleToggle lsp_type_definitions<cr>", desc = "LSP type definitions" },
+    ["<leader>xi"] = { "<cmd>TroubleToggle lsp_implementations<cr>", desc = "LSP implementations" },
+    
+    -- Dropbar
+    ["<leader>tt"] = { "<cmd>lua require('dropbar.api').pick()<cr>", desc = "Dropbar menu" },
   },
 
   t = {
