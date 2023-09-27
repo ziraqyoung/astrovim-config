@@ -132,20 +132,20 @@ return {
       require("hover").setup {
         init = function()
           -- Require providers
-          require("hover.providers.lsp")
-          require('hover.providers.gh')
-          require('hover.providers.man')
-          require('hover.providers.dictionary')
+          require "hover.providers.lsp"
+          require "hover.providers.gh"
+          require "hover.providers.man"
+          require "hover.providers.dictionary"
         end,
         preview_opts = {
-          border = nil
+          border = nil,
         },
         -- Whether the contents of a currently open hover window should be moved
         -- to a :h preview-window when pressing the hover keymap.
         preview_window = false,
-        title = true
+        title = true,
       }
-    end
+    end,
   },
   {
     "stevearc/aerial.nvim", -- code outline
@@ -238,6 +238,7 @@ return {
   "sunaku/vim-ruby-minitest",
   {
     "kylechui/nvim-surround",
+    event = "VeryLazy",
     config = function()
       require("nvim-surround").setup {
         -- Configuration here, or leave empty to use defaults

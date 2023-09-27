@@ -69,7 +69,7 @@ return {
     -- Other PLugins
     ["<leader>rc"] = { ":lua require('ror.commands').list_commands()<CR>" },
     ["<leader>a"] = { "<cmd>AerialToggle<CR>" },
-    ["<C-\\>"] = { "<cmd>ToggleTerm direction=float start_in_insert=true<cr>", desc = "Toggle terminal" },
+    ["<C-\\>"] = { "<cmd>ToggleTerm direction=float start_in_insert=true insert_mappings=true<cr>", desc = "Toggle terminal" },
 
     -- Trouble (assumes <leader>x for Trouble)
     ["<leader>xt"] = { "<cmd>TroubleToggle<cr>", desc = "Trouble" },
