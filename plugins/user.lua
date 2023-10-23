@@ -199,6 +199,24 @@ return {
   { "ray-x/web-tools.nvim" },
   -- Rails
   {
+    "stevearc/dressing.nvim", -- for ror.nvim plugin
+    config = function()
+      require("dressing").setup {
+        input = {
+          get_config = function()
+            -- disable for NvimTree
+            if vim.api.nvim_buf_get_option(0, "filetype") == "NvimTree" then return { enabled = false } end
+          end,
+          min_width = { 60, 0.9 },
+        },
+        select = {
+          -- telescope = require('telescope.themes').get_ivy({...})
+          telescope = require("telescope.themes").get_dropdown { layout_config = { height = 15, width = 90 } },
+        },
+      }
+    end,
+  },
+  {
     "weizheheng/ror.nvim",
     dependencies = { "rcarriga/nvim-notify", "stevearc/dressing.nvim" },
     config = function() require("ror").setup {} end,
