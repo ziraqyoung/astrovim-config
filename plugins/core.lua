@@ -25,6 +25,9 @@ return {
     opts = function(_, opts)
       opts.filesystem.filtered_items = {
         hide_dotfiles = false,
+        hide_by_name = {
+          ".git",
+        },
       }
       opts.window.position = "right"
       return opts

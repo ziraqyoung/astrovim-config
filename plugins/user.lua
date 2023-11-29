@@ -2,6 +2,37 @@ return {
   -- You can also add new plugins here as well:
   -- Add plugins, the lazy syntax
   -- "andweeb/presence.nvim",
+
+  -- Performance
+  {
+    "zeioth/garbage-day.nvim", -- Stops inactive LSP clients to free RAM
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    dependencies = "neovim/nvim-lspconfig",
+    opts = { notifications = true },
+  },
+  {
+    "echasnovski/mini.files",
+    event = "VeryLazy",
+    config = function()
+      require("mini.files").setup {
+        windows = {
+          preview = true,
+          width_focus = 30,
+          width_preview = 30,
+        },
+        options = {
+          -- Whether to use for editing directories
+          -- Disabled by default in LazyVim because neo-tree is used for that
+          use_as_default_explorer = false,
+        },
+      }
+    end,
+  },
+  {
+    "folke/neodev.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+    config = function() require("neodev").setup() end,
+  },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -57,6 +88,16 @@ return {
         },
       }
     end,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    config = function() require("dapui").setup() end,
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    event = "VeryLazy",
+    config = function() require("nvim-dap-virtual-text").setup() end,
   },
   -- Go language
   "olexsmir/gopher.nvim",
@@ -148,6 +189,45 @@ return {
     end,
   },
   {
+    "nvimdev/lspsaga.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("lspsaga").setup {
+        ui = {
+          border = "rounded",
+        },
+        lightbulb = {
+          enable = false,
+          enable_in_insert = true,
+          sign = true,
+          sign_priority = 40,
+          virtual_text = true,
+        },
+        outline = {
+          -- left_width = 0.5,
+          -- layout = "float",
+          max_height = 0.8,
+          left_width = 0.4,
+        },
+        symbol_in_winbar = {
+          enable = true,
+          hide_keyword = true,
+          show_file = true,
+          folder_level = 2,
+        },
+      }
+    end,
+  },
+
+  {
+    "simrat39/symbols-outline.nvim",
+    config = function() require("symbols-outline").setup() end,
+  },
+  {
     "stevearc/aerial.nvim", -- code outline
     config = function()
       require("aerial").setup {
@@ -196,6 +276,14 @@ return {
     "felipec/vim-sanegx",
     event = "BufRead",
   },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function() require("refactoring").setup {} end,
+  },
   { "ray-x/web-tools.nvim" },
   -- Rails
   {
@@ -223,11 +311,11 @@ return {
   },
   {
     "tpope/vim-bundler",
-    cmd = { "Bundler", "Bopen", "Bsplit", "Btabedit" },
+    event = { "BufReadPre", "BufNewFile" },
   },
   {
     "tpope/vim-rails",
-    ft = { "ruby", "eruby" },
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       -- disable autocmd set filetype=eruby.yaml
       vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
@@ -235,6 +323,10 @@ return {
         callback = function() vim.bo.filetype = "yaml" end,
       })
     end,
+  },
+  {
+    "tpope/vim-rake",
+    event = { "BufReadPre", "BufNewFile" },
   },
   {
     "RRethy/nvim-treesitter-endwise",
@@ -247,11 +339,10 @@ return {
       }
     end,
   },
-  "tpope/vim-repeat",
-  "tpope/vim-rake",
   {
     "tpope/vim-haml",
     ft = { "haml" },
+    event = { "BufReadPre", "BufNewFile" },
   },
   "sunaku/vim-ruby-minitest",
   {

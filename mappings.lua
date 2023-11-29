@@ -6,14 +6,14 @@
 return {
   -- first key is the mode
   n = {
+    ["<leader>h"] = { "<cmd>nohlsearch<CR>", desc = "No Highlight" },
     -- second key is the lefthand side of the map
     -- mappings seen under group name "Buffer"
     ["<leader>bD"] = {
       function()
-        require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)
-          require("astronvim.utils.buffer").close(
-            bufnr)
-        end)
+        require("astronvim.utils.status").heirline.buffer_picker(
+          function(bufnr) require("astronvim.utils.buffer").close(bufnr) end
+        )
       end,
       desc = "Pick to close",
     },
@@ -27,18 +27,37 @@ return {
     ["<leader>bn"] = { "<cmd>BufferLineCycleNext<cr>", desc = "New Buffer" },
     ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
 
+
     -- Telescope
     ["<leader>go"] = { "<cmd>Telescope git_status<cr>", desc = "Open changed file" },
-    ["<leader>fs"] = { ":lua require('telescope.builtin').find_files({ search_dirs = {vim.fn.expand('%:p:h')} })<CR>", desc = "Find file in this buffer's working directory" },
+    ["<leader>fs"] = {
+      ":lua require('telescope.builtin').find_files({ search_dirs = {vim.fn.expand('%:p:h')} })<CR>",
+      desc = "Find file in this buffer's working directory",
+    },
 
     -- Useful LSP configuration
-    ["K"] = { "<cmd>lua require('hover').hover()<cr>", desc = "hover.nvim" },
+    -- ["K"] = { "<cmd>lua require('hover').hover()<cr>", desc = "hover.nvim" },
     ["gK"] = { "<cmd>lua require('hover').hover_select()<cr>", desc = "hover.nvim(select)" },
-    ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Goto definition" },
-    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", desc = "Goto Declaration" },
-    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", desc = "Goto references" },
-    ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", desc = "Goto Implementation" },
-    ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "show signature help" },
+    ["gd"] = {
+      function() require("telescope.builtin").lsp_definitions() end,
+      desc = "lsp references",
+    },
+    ["gD"] = {
+      function() require("telescope.builtin").lsp_type_definitions() end,
+      desc = "lsp references",
+    },
+    ["gr"] = {
+      function() require("telescope.builtin").lsp_references() end,
+      desc = "lsp references",
+    },
+    ["gi"] = {
+      function() require("telescope.builtin").lsp_implementations() end,
+      desc = "Lsp implementations",
+    },
+    ["gs"] = {
+      function() require("telescope.builtin").lsp_document_symbols() end,
+      desc = "Goto document symbols",
+    },
     ["gl"] = {
       function()
         local float = vim.diagnostic.config().float
@@ -52,12 +71,17 @@ return {
       end,
       desc = "Show line diagnostics",
     },
+    ["ga"] = { ":Lspsaga code_action<CR>" }, -- lspsaga
+    ["go"] = { ":Lspsaga outline<CR>" },     -- lspsaga
 
     -- Neotest
     ["<leader>dm"] = { "<cmd>lua require('neotest').run.run()<cr>", desc = "Test Method" },
     ["<leader>dM"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", desc = "Test Method DAP" },
     ["<leader>df"] = { "<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>", desc = "Test Class" },
-    ["<leader>dF"] = { "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", desc = "Test Class DAP" },
+    ["<leader>dF"] = {
+      "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>",
+      desc = "Test Class DAP",
+    },
     ["<leader>dS"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Test Summary" },
 
     -- Noice
@@ -69,7 +93,11 @@ return {
     -- Other PLugins
     ["<leader>rc"] = { ":lua require('ror.commands').list_commands()<CR>" },
     ["<leader>a"] = { "<cmd>AerialToggle<CR>" },
-    ["<C-\\>"] = { "<cmd>ToggleTerm direction=float start_in_insert=true insert_mappings=true<cr>", desc = "Toggle terminal" },
+    ["<leader>st"] = { "<cmd>TodoTelescope<CR>", desc = "Search all project Todos" },
+    ["<C-\\>"] = {
+      "<cmd>ToggleTerm direction=float start_in_insert=true insert_mappings=true<cr>",
+      desc = "Toggle terminal",
+    },
 
     -- Trouble (assumes <leader>x for Trouble)
     ["<leader>xt"] = { "<cmd>TroubleToggle<cr>", desc = "Trouble" },
@@ -77,9 +105,40 @@ return {
     ["<leader>xd"] = { "<cmd>TroubleToggle lsp_definitions<cr>", desc = "LSP definitions" },
     ["<leader>xT"] = { "<cmd>TroubleToggle lsp_type_definitions<cr>", desc = "LSP type definitions" },
     ["<leader>xi"] = { "<cmd>TroubleToggle lsp_implementations<cr>", desc = "LSP implementations" },
-    
+
     -- Dropbar
     ["<leader>tt"] = { "<cmd>lua require('dropbar.api').pick()<cr>", desc = "Dropbar menu" },
+
+    -- Mini.files
+    ["<leader>mf"] = {
+      "<cmd>lua require('mini.files').open(vim.api.nvim_buf_get_name(0), true)<cr>",
+      desc = "Dropbar menu",
+    },
+
+    -- Git
+    ["<leader>gg"] = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", desc = "Lazygit" },
+    ["<leader>gj"] = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", desc = "Next Hunk" },
+    ["<leader>gk"] = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", desc = "Prev Hunk" },
+    ["<leader>gl"] = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", desc = "Blame" },
+    ["<leader>gp"] = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", desc = "Preview Hunk" },
+    ["<leader>gr"] = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = "Reset Hunk" },
+    ["<leader>gR"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = "Reset Buffer" },
+    ["<leader>gs"] = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", desc = "Stage Hunk" },
+    ["<leader>gu"] = {
+      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+      desc = "Undo Stage Hunk",
+    },
+    ["<leader>go"] = { "<cmd>Telescope git_status<cr>", desc = "Open changed file" },
+    ["<leader>gb"] = { "<cmd>Telescope git_branches<cr>", desc = "Checkout branch" },
+    ["<leader>gc"] = { "<cmd>Telescope git_commits<cr>", desc = "Checkout commit" },
+    ["<leader>gC"] = {
+      "<cmd>Telescope git_bcommits<cr>",
+      desc = "Checkout commit(for current file)",
+    },
+    ["<leader>gd"] = {
+      "<cmd>Gitsigns diffthis HEAD<cr>",
+      desc = "Git Diff",
+    },
   },
 
   t = {

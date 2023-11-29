@@ -6,17 +6,32 @@ return {
     number = true, -- sets vim.opt.number
     spell = false, -- sets vim.opt.spell
     signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-    wrap = false, -- sets vim.opt.wrap
-    guicursor = "i:block", --  set cursor of insert mode as block.
-    foldcolumn = '1', -- '0' is not bad
-    foldlevel = 99,   -- Using ufo provider need a large value, feel free to decrease the value
+    -- guicursor = "i:block", --  set cursor of insert mode as block.
+    -- guicursor = "n-v-c:block-Cursor/lCursor",
+    guicursor = {
+      "n-v:block-block-Cursor/lCursor",
+      "i-c-ci-ve:ver25-Cursor/lCursor",
+      "r-cr:hor20",
+      "o:hor50",
+      "i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor",
+      "sm:block-blinkwait175-blinkoff150-blinkon175",
+    },
+    foldcolumn = "1", -- '0' is not bad
+    foldlevel = 99, -- Using ufo provider need a large value, feel free to decrease the value
     foldlevelstart = 99,
     foldenable = true,
     list = true,
     listchars = {
-      eol = '⤶',
-      space = '⋅',
+      eol = "↲",
+      space = "·",
+      tab = "» ",
+      trail = "·",
+      extends = "<",
+      precedes = ">",
+      nbsp = "␣",
+      conceal = "┊",
     },
+    wrap = true,
   },
   g = {
     mapleader = " ", -- sets vim.g.mapleader

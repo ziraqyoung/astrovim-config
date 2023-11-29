@@ -27,8 +27,13 @@ return {
   -- { import = "astrocommunity.completion.copilot-lua-cmp" },
   { import = "astrocommunity.colorscheme.kanagawa-nvim" },
   -- Enhancements
-   { import = "astrocommunity.project.nvim-spectre" },
-   { import = "astrocommunity.diagnostics.trouble-nvim" },
+  { import = "astrocommunity.indent.mini-indentscope" },
+  {
+  "echasnovski/mini.indentscope",
+    opts = { symbol = "╎", options = { try_as_border = false, indent_at_cursor = true } },
+  },
+  { import = "astrocommunity.project.nvim-spectre" },
+  { import = "astrocommunity.diagnostics.trouble-nvim" },
   -- PLugins
   { import = "astrocommunity.bars-and-lines.dropbar-nvim" },
   { import = "astrocommunity.bars-and-lines.bufferline-nvim" },
@@ -37,13 +42,13 @@ return {
     opts = {
       options = {
         indicator = {
-          icon = '▎', -- this should be omitted if indicator style is not 'icon'
+          icon = "▎", -- this should be omitted if indicator style is not 'icon'
         },
-        buffer_close_icon = '󰅖',
-        modified_icon = '●',
-        close_icon = '',
-        left_trunc_marker = '',
-        right_trunc_marker = '',
+        buffer_close_icon = "󰅖",
+        modified_icon = "●",
+        close_icon = "",
+        left_trunc_marker = "",
+        right_trunc_marker = "",
         diagnostics = "nvim_lsp",
         color_icons = true,
         show_buffer_icons = true, -- disable filetype icons for buffers
@@ -55,9 +60,9 @@ return {
             text = "File Explorer",
             text_align = "center",
             -- separator = true
-          }
+          },
         },
-      }
+      },
     },
   },
 }
