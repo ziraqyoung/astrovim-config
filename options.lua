@@ -16,6 +16,7 @@ return {
       "i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor",
       "sm:block-blinkwait175-blinkoff150-blinkon175",
     },
+    scrolloff = 2,
     foldcolumn = "1", -- '0' is not bad
     foldlevel = 99, -- Using ufo provider need a large value, feel free to decrease the value
     foldlevelstart = 99,

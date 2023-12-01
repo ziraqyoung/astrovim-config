@@ -189,6 +189,24 @@ return {
     end,
   },
   {
+    "romgrk/nvim-treesitter-context",
+    event = "VeryLazy",
+    config = function()
+      require("treesitter-context").setup {
+        enable = true,
+        throttle = true,
+        max_lines = 0,
+        patterns = {
+          default = {
+            "class",
+            "function",
+            "method",
+          },
+        },
+      }
+    end,
+  },
+  {
     "nvimdev/lspsaga.nvim",
     event = "VeryLazy",
     dependencies = {
@@ -218,6 +236,10 @@ return {
           hide_keyword = true,
           show_file = true,
           folder_level = 2,
+        },
+        definition = {
+          -- width = 0.8,
+          height = 0.8,
         },
       }
     end,

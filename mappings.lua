@@ -72,6 +72,7 @@ return {
       desc = "Show line diagnostics",
     },
     ["ga"] = { ":Lspsaga code_action<CR>" }, -- lspsaga
+    ["gp"] = { ":Lspsaga peek_definition<CR>" }, -- lspsaga
     ["go"] = { ":Lspsaga outline<CR>" },     -- lspsaga
 
     -- Neotest
