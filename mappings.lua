@@ -117,7 +117,6 @@ return {
     },
 
     -- Git
-    ["<leader>gg"] = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", desc = "Lazygit" },
     ["<leader>gj"] = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", desc = "Next Hunk" },
     ["<leader>gk"] = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", desc = "Prev Hunk" },
     ["<leader>gl"] = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", desc = "Blame" },

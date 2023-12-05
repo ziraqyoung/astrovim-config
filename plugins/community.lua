@@ -37,6 +37,9 @@ return {
   -- PLugins
   { import = "astrocommunity.bars-and-lines.dropbar-nvim" },
   { import = "astrocommunity.bars-and-lines.bufferline-nvim" },
+  { import = "astrocommunity.file-explorer.oil-nvim" },
+  { import = "astrocommunity.motion.vim-matchup" },
+  { import = "astrocommunity.markdown-and-latex.glow-nvim" },
   {
     "bufferline.nvim",
     opts = {

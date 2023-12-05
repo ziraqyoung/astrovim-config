@@ -97,75 +97,33 @@ return {
   {
     "theHamsta/nvim-dap-virtual-text",
     event = "VeryLazy",
-    config = function() require("nvim-dap-virtual-text").setup() end,
+    config = function() require("nvim-dap-virtual-text").setup {} end,
   },
-  -- Go language
-  "olexsmir/gopher.nvim",
-  "leoluz/nvim-dap-go",
-  -- Rust language
+  -- Linting
   -- {
-  --   "saecki/crates.nvim",
-  --   version = "v0.3.0",
-  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   "mfussenegger/nvim-lint",
+  --   enabled = false,
   --   config = function()
-  --     require("crates").setup {
-  --       null_ls = {
-  --         enabled = true,
-  --         name = "crates.nvim",
-  --       },
-  --       popup = {
-  --         border = "rounded",
-  --       },
+  --     require("lint").linters_by_ft = {
+  --       gitcommit = { "gitlint" },
+  --       markdown = { "markdownlint" },
+  --       javascript = { "eslint_d" },
+  --       typescript = { "eslint_d" },
+  --       eruby = { "erb_lint" },
+  --       json = { "jsonlint" },
+  --       scss = { "stylelint" },
   --     }
+  --
+  --     vim.api.nvim_create_autocmd({
+  --       "BufReadPost",
+  --       "BufWritePost",
+  --       "InsertLeave",
+  --     }, {
+  --       desc = "Lint",
+  --       callback = function() require("lint").try_lint() end,
+  --     })
   --   end,
   -- },
-  {
-    -- "simrat39/rust-tools.nvim",
-    -- config = function()
-    --   require("rust-tools").setup {
-    --     tools = {
-    --       executor = require("rust-tools/executors").termopen, -- can be quickfix or termopen
-    --       reload_workspace_from_cargo_toml = true,
-    --       inlay_hints = {
-    --         auto = true,
-    --         only_current_line = false,
-    --         show_parameter_hints = true,
-    --         parameter_hints_prefix = "<-",
-    --         other_hints_prefix = "=>",
-    --         max_len_align = false,
-    --         max_len_align_padding = 1,
-    --         right_align = false,
-    --         right_align_padding = 7,
-    --         highlight = "Comment",
-    --       },
-    --       hover_actions = {
-    --         border = {
-    --           { "╭", "FloatBorder" },
-    --           { "─", "FloatBorder" },
-    --           { "╮", "FloatBorder" },
-    --           { "│", "FloatBorder" },
-    --           { "╯", "FloatBorder" },
-    --           { "─", "FloatBorder" },
-    --           { "╰", "FloatBorder" },
-    --           { "│", "FloatBorder" },
-    --         },
-    --         auto_focus = true,
-    --       },
-    --     },
-    --     server = {
-    --       on_init = require("lvim.lsp").common_on_init,
-    --       on_attach = function(client, bufnr)
-    --         require("lvim.lsp").common_on_attach(client, bufnr)
-    --         local rt = require "rust-tools"
-    --         -- Hover actions
-    --         vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-    --         -- Code action groups
-    --         vim.keymap.set("n", "<leader>lA", rt.code_action_group.code_action_group, { buffer = bufnr })
-    --       end,
-    --     },
-    --   }
-    -- end,
-  },
   -- Other plugins
   {
     "lewis6991/hover.nvim",
@@ -188,24 +146,24 @@ return {
       }
     end,
   },
-  {
-    "romgrk/nvim-treesitter-context",
-    event = "VeryLazy",
-    config = function()
-      require("treesitter-context").setup {
-        enable = true,
-        throttle = true,
-        max_lines = 0,
-        patterns = {
-          default = {
-            "class",
-            "function",
-            "method",
-          },
-        },
-      }
-    end,
-  },
+  -- {
+  --   "romgrk/nvim-treesitter-context",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("treesitter-context").setup {
+  --       enable = true,
+  --       throttle = true,
+  --       max_lines = 0,
+  --       patterns = {
+  --         default = {
+  --           "class",
+  --           "function",
+  --           "method",
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
   {
     "nvimdev/lspsaga.nvim",
     event = "VeryLazy",
@@ -270,7 +228,12 @@ return {
   -- TreeSitter plugins
   {
     "windwp/nvim-ts-autotag", -- autoclose and autorename html tag
-    config = function() require("nvim-ts-autotag").setup() end,
+    event = "BufRead",
+    config = function()
+      require("nvim-ts-autotag").setup {
+        filetypes = { "html", "xml", "eruby", "embedded_template" },
+      }
+    end,
   },
   {
     "rmagatti/goto-preview",
