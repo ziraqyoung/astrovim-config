@@ -9,10 +9,10 @@ return {
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
     config.sources = {
       -- Set a formatter
-      null_ls.builtins.diagnostics.erb_lint,
-      null_ls.builtins.diagnostics.haml_lint,
-      null_ls.builtins.formatting.erb_lint,
-      null_ls.builtins.formatting.erb_format,
+      -- null_ls.builtins.diagnostics.erb_lint,
+      -- null_ls.builtins.diagnostics.haml_lint,
+      -- null_ls.builtins.formatting.erb_lint,
+      -- null_ls.builtins.formatting.erb_format,
       -- null_ls.builtins.formatting.prettier,
     }
     return config -- return final config table

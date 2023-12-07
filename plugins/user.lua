@@ -100,30 +100,31 @@ return {
     config = function() require("nvim-dap-virtual-text").setup {} end,
   },
   -- Linting
-  -- {
-  --   "mfussenegger/nvim-lint",
-  --   enabled = false,
-  --   config = function()
-  --     require("lint").linters_by_ft = {
-  --       gitcommit = { "gitlint" },
-  --       markdown = { "markdownlint" },
-  --       javascript = { "eslint_d" },
-  --       typescript = { "eslint_d" },
-  --       eruby = { "erb_lint" },
-  --       json = { "jsonlint" },
-  --       scss = { "stylelint" },
-  --     }
-  --
-  --     vim.api.nvim_create_autocmd({
-  --       "BufReadPost",
-  --       "BufWritePost",
-  --       "InsertLeave",
-  --     }, {
-  --       desc = "Lint",
-  --       callback = function() require("lint").try_lint() end,
-  --     })
-  --   end,
-  -- },
+  {
+    "mfussenegger/nvim-lint",
+    enabled = false,
+    config = function()
+      require("lint").linters_by_ft = {
+        gitcommit = { "gitlint" },
+        markdown = { "markdownlint" },
+        javascript = { "eslint_d" },
+        typescript = { "eslint_d" },
+        eruby = { "erb_lint" },
+        ruby = { "standardrb" },
+        json = { "jsonlint" },
+        scss = { "stylelint" },
+      }
+
+      vim.api.nvim_create_autocmd({
+        "BufReadPost",
+        "BufWritePost",
+        "InsertLeave",
+      }, {
+        desc = "Lint",
+        callback = function() require("lint").try_lint() end,
+      })
+    end,
+  },
   -- Other plugins
   {
     "lewis6991/hover.nvim",

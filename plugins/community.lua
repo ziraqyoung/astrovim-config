@@ -37,9 +37,6 @@ return {
   -- PLugins
   { import = "astrocommunity.bars-and-lines.dropbar-nvim" },
   { import = "astrocommunity.bars-and-lines.bufferline-nvim" },
-  { import = "astrocommunity.file-explorer.oil-nvim" },
-  { import = "astrocommunity.motion.vim-matchup" },
-  { import = "astrocommunity.markdown-and-latex.glow-nvim" },
   {
     "bufferline.nvim",
     opts = {
@@ -67,5 +64,17 @@ return {
         },
       },
     },
+  },
+  { import = "astrocommunity.file-explorer.oil-nvim" },
+  { import = "astrocommunity.motion.vim-matchup" },
+  { import = "astrocommunity.markdown-and-latex.glow-nvim" },
+  {
+    "glow.nvim",
+    opts = {
+      width = 200,
+      height = 150,
+      width_ratio = 0.9, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
+      height_ratio = 0.8,
+    }
   },
 }
