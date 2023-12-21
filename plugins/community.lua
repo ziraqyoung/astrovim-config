@@ -12,7 +12,7 @@ return {
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.docker" },
   { import = "astrocommunity.pack.go" },
-  { import = "astrocommunity.pack.html-css" },
+  -- { import = "astrocommunity.pack.html-css" }, -- use emmet-language-server instead of emmet_ls
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.markdown" },

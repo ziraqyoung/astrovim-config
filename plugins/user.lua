@@ -4,11 +4,18 @@ return {
   -- "andweeb/presence.nvim",
 
   -- Performance
+  -- NOTE: ruby-lsp reload takes forever, not worth it
+  -- {
+  --   "zeioth/garbage-day.nvim", -- Stops inactive LSP clients to free RAM
+  --   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  --   dependencies = "neovim/nvim-lspconfig",
+  --   opts = { notifications = true },
+  -- },
+  -- Telescope
   {
-    "zeioth/garbage-day.nvim", -- Stops inactive LSP clients to free RAM
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    dependencies = "neovim/nvim-lspconfig",
-    opts = { notifications = true },
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    config = function() require("telescope").load_extension "file_browser" end,
   },
   {
     "echasnovski/mini.files",
@@ -73,22 +80,23 @@ return {
     "klen/nvim-test",
     config = function()
       require("nvim-test").setup {
-        run = true, -- run tests (using for debug)
-        commands_create = true, -- create commands (TestFile, TestLast, ...)
+        run = true,               -- run tests (using for debug)
+        commands_create = true,   -- create commands (TestFile, TestLast, ...)
         filename_modifier = ":.", -- modify filenames before tests run(:h filename-modifiers)
-        silent = false, -- less notifications
-        term = "terminal", -- a terminal to run ("terminal"|"toggleterm")
+        silent = false,           -- less notifications
+        term = "terminal",        -- a terminal to run ("terminal"|"toggleterm")
         termOpts = {
           direction = "vertical", -- terminal's direction ("horizontal"|"vertical"|"float")
-          width = 96, -- terminal's width (for vertical|float)
-          height = 24, -- terminal's height (for horizontal|float)
-          go_back = false, -- return focus to original window after executing
-          stopinsert = "auto", -- exit from insert mode (true|false|"auto")
-          keep_one = true, -- keep only one terminal for testing
+          width = 96,             -- terminal's width (for vertical|float)
+          height = 24,            -- terminal's height (for horizontal|float)
+          go_back = false,        -- return focus to original window after executing
+          stopinsert = "auto",    -- exit from insert mode (true|false|"auto")
+          keep_one = true,        -- keep only one terminal for testing
         },
       }
     end,
   },
+  -- Dap
   {
     "rcarriga/nvim-dap-ui",
     event = "VeryLazy",
@@ -99,31 +107,9 @@ return {
     event = "VeryLazy",
     config = function() require("nvim-dap-virtual-text").setup {} end,
   },
-  -- Linting
   {
-    "mfussenegger/nvim-lint",
-    enabled = false,
-    config = function()
-      require("lint").linters_by_ft = {
-        gitcommit = { "gitlint" },
-        markdown = { "markdownlint" },
-        javascript = { "eslint_d" },
-        typescript = { "eslint_d" },
-        eruby = { "erb_lint" },
-        ruby = { "standardrb" },
-        json = { "jsonlint" },
-        scss = { "stylelint" },
-      }
-
-      vim.api.nvim_create_autocmd({
-        "BufReadPost",
-        "BufWritePost",
-        "InsertLeave",
-      }, {
-        desc = "Lint",
-        callback = function() require("lint").try_lint() end,
-      })
-    end,
+    "mfussenegger/nvim-dap",
+    dependencies = { "suketa/nvim-dap-ruby", config = true },
   },
   -- Other plugins
   {
@@ -240,10 +226,10 @@ return {
     "rmagatti/goto-preview",
     config = function()
       require("goto-preview").setup {
-        width = 120, -- Width of the floating window
-        height = 25, -- Height of the floating window
-        debug = false, -- Print debug information
-        opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        width = 120,          -- Width of the floating window
+        height = 25,          -- Height of the floating window
+        debug = false,        -- Print debug information
+        opacity = nil,        -- 0-100 opacity level of the floating window where 100 is fully transparent.
         post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
       }
     end,
@@ -341,20 +327,57 @@ return {
     end,
   },
   {
+    "kevinhwang91/nvim-ufo", --code folding
+    dependencies = { "kevinhwang91/promise-async" },
+    config = function()
+      local handler = function(virtText, lnum, endLnum, width, truncate)
+        local newVirtText = {}
+        local suffix = ("  %d "):format(endLnum - lnum)
+        local sufWidth = vim.fn.strdisplaywidth(suffix)
+        local targetWidth = width - sufWidth
+        local curWidth = 0
+        for _, chunk in ipairs(virtText) do
+          local chunkText = chunk[1]
+          local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+          if targetWidth > curWidth + chunkWidth then
+            table.insert(newVirtText, chunk)
+          else
+            chunkText = truncate(chunkText, targetWidth - curWidth)
+            local hlGroup = chunk[2]
+            table.insert(newVirtText, { chunkText, hlGroup })
+            chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            -- str width returned from truncate() may less than 2nd argument, need padding
+            if curWidth + chunkWidth < targetWidth then
+              suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+            end
+            break
+          end
+          curWidth = curWidth + chunkWidth
+        end
+        table.insert(newVirtText, { suffix, "MoreMsg" })
+        return newVirtText
+      end
+      require("ufo").setup {
+        fold_virt_text_handler = handler,
+        provider_selector = function(bufnr, filetype, buftype) return { "treesitter", "indent" } end,
+      }
+    end,
+  },
+  {
     "karb94/neoscroll.nvim",
     event = "WinScrolled",
     config = function()
       require("neoscroll").setup {
         -- All these keys will be mapped to their corresponding default scrolling animation
         mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
-        hide_cursor = true, -- Hide cursor while scrolling
-        stop_eof = true, -- Stop at <EOF> when scrolling downwards
+        hide_cursor = true,          -- Hide cursor while scrolling
+        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
         use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-        respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
         cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-        easing_function = nil, -- Default easing function
-        pre_hook = nil, -- Function to run before the scrolling animation starts
-        post_hook = nil, -- Function to run after the scrolling animation ends
+        easing_function = nil,       -- Default easing function
+        pre_hook = nil,              -- Function to run before the scrolling animation starts
+        post_hook = nil,             -- Function to run after the scrolling animation ends
       }
     end,
   },
@@ -398,11 +421,6 @@ return {
     ft = { "qml" },
   },
   {
-    "turbio/bracey.vim",
-    cmd = { "Bracey", "BracyStop", "BraceyReload", "BraceyEval" },
-    build = "npm install --prefix server",
-  },
-  {
     "navarasu/onedark.nvim",
     config = function()
       require("onedark").setup {
@@ -437,42 +455,12 @@ return {
       }
     end,
   },
-  "AlexvZyl/nordic.nvim",
   {
-    "kevinhwang91/nvim-ufo", --code folding
-    dependencies = { "kevinhwang91/promise-async" },
+    "AlexvZyl/nordic.nvim",
+    lazy = false,
+    priority = 1000,
     config = function()
-      local handler = function(virtText, lnum, endLnum, width, truncate)
-        local newVirtText = {}
-        local suffix = ("  %d "):format(endLnum - lnum)
-        local sufWidth = vim.fn.strdisplaywidth(suffix)
-        local targetWidth = width - sufWidth
-        local curWidth = 0
-        for _, chunk in ipairs(virtText) do
-          local chunkText = chunk[1]
-          local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-          if targetWidth > curWidth + chunkWidth then
-            table.insert(newVirtText, chunk)
-          else
-            chunkText = truncate(chunkText, targetWidth - curWidth)
-            local hlGroup = chunk[2]
-            table.insert(newVirtText, { chunkText, hlGroup })
-            chunkWidth = vim.fn.strdisplaywidth(chunkText)
-            -- str width returned from truncate() may less than 2nd argument, need padding
-            if curWidth + chunkWidth < targetWidth then
-              suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
-            end
-            break
-          end
-          curWidth = curWidth + chunkWidth
-        end
-        table.insert(newVirtText, { suffix, "MoreMsg" })
-        return newVirtText
-      end
-      require("ufo").setup {
-        fold_virt_text_handler = handler,
-        provider_selector = function(bufnr, filetype, buftype) return { "treesitter", "indent" } end,
-      }
-    end,
-  },
+      require 'nordic'.load()
+    end
+  }
 }

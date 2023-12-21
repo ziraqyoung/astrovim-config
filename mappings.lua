@@ -29,10 +29,13 @@ return {
 
 
     -- Telescope
-    ["<leader>go"] = { "<cmd>Telescope git_status<cr>", desc = "Open changed file" },
     ["<leader>fs"] = {
       ":lua require('telescope.builtin').find_files({ search_dirs = {vim.fn.expand('%:p:h')} })<CR>",
       desc = "Find file in this buffer's working directory",
+    },
+    ["<leader>fB"] = {
+      ":Telescope file_browser<CR>",
+      desc = "Telescope file browser",
     },
 
     -- Useful LSP configuration
