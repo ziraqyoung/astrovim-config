@@ -33,6 +33,7 @@ return {
       conceal = "┊",
     },
     wrap = true,
+    completeopt = 'menuone,noselect',
   },
   g = {
     mapleader = " ", -- sets vim.g.mapleader

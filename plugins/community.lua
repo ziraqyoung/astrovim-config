@@ -20,7 +20,9 @@ return {
   { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.toml" },
   { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.pack.vue" },
   { import = "astrocommunity.pack.yaml" },
+  { import = "astrocommunity.test.neotest" },
 
   -- Themes
   -- { import = "astrocommunity.colorscheme.catppuccin" },

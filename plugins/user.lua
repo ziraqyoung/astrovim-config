@@ -43,7 +43,7 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    dependencies = { "MunifTanjim/nui.nvim" },
+    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
     config = function()
       require("noice").setup {
         lsp = {
@@ -59,8 +59,14 @@ return {
   },
   {
     "ray-x/lsp_signature.nvim",
-    event = "BufRead",
-    config = function() require("lsp_signature").setup() end,
+    event = "VeryLazy",
+    opts = {
+      bind = true, -- This is mandatory, otherwise border config won't get registered.
+      handler_opts = {
+        border = "rounded"
+      }
+    },
+    config = function(_, opts) require 'lsp_signature'.setup(opts) end
   },
   -- Git and friends
   {
@@ -112,6 +118,11 @@ return {
     dependencies = { "suketa/nvim-dap-ruby", config = true },
   },
   -- Other plugins
+  {
+    "ellisonleao/dotenv.nvim",
+    config = function() require("dotenv").setup() end,
+  },
+
   {
     "lewis6991/hover.nvim",
     config = function()
@@ -459,8 +470,6 @@ return {
     "AlexvZyl/nordic.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
-      require 'nordic'.load()
-    end
-  }
+    config = function() require("nordic").load() end,
+  },
 }
