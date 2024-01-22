@@ -4,7 +4,7 @@ return {
   -- example of imporing a plugin, comment out to use it or add your own
   -- available plugins can be found at https://github.com/AstroNvim/astrocommunity
 
-  -- Tool packs
+  -- Language packs
   -- { import = "astrocommunity.pack.ruby" },
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.bash" },
@@ -23,6 +23,9 @@ return {
   { import = "astrocommunity.pack.vue" },
   { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.test.neotest" },
+
+  -- Lsp
+  { import = "astrocommunity.lsp.lsp-signature-nvim" },
 
   -- Themes
   -- { import = "astrocommunity.colorscheme.catppuccin" },

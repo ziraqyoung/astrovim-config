@@ -100,5 +100,8 @@ return {
     --     ["~/%.config/foo/.*"] = "fooscript",
     --   },
     -- }
+
+    -- Fix wierd unindent in ruby files
+    vim.cmd('autocmd FileType ruby setlocal indentkeys-=.')
   end,
 }

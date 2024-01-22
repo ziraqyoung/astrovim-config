@@ -60,14 +60,10 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
-    opts = {
-      bind = true, -- This is mandatory, otherwise border config won't get registered.
-      handler_opts = {
-        border = "rounded"
-      }
-    },
-    config = function(_, opts) require 'lsp_signature'.setup(opts) end
+    opts = {},
+    config = function(_, opts) require("lsp_signature").setup(opts) end,
   },
+
   -- Git and friends
   {
     "sindrets/diffview.nvim",
@@ -86,18 +82,18 @@ return {
     "klen/nvim-test",
     config = function()
       require("nvim-test").setup {
-        run = true,               -- run tests (using for debug)
-        commands_create = true,   -- create commands (TestFile, TestLast, ...)
+        run = true, -- run tests (using for debug)
+        commands_create = true, -- create commands (TestFile, TestLast, ...)
         filename_modifier = ":.", -- modify filenames before tests run(:h filename-modifiers)
-        silent = false,           -- less notifications
-        term = "terminal",        -- a terminal to run ("terminal"|"toggleterm")
+        silent = false, -- less notifications
+        term = "terminal", -- a terminal to run ("terminal"|"toggleterm")
         termOpts = {
           direction = "vertical", -- terminal's direction ("horizontal"|"vertical"|"float")
-          width = 96,             -- terminal's width (for vertical|float)
-          height = 24,            -- terminal's height (for horizontal|float)
-          go_back = false,        -- return focus to original window after executing
-          stopinsert = "auto",    -- exit from insert mode (true|false|"auto")
-          keep_one = true,        -- keep only one terminal for testing
+          width = 96, -- terminal's width (for vertical|float)
+          height = 24, -- terminal's height (for horizontal|float)
+          go_back = false, -- return focus to original window after executing
+          stopinsert = "auto", -- exit from insert mode (true|false|"auto")
+          keep_one = true, -- keep only one terminal for testing
         },
       }
     end,
@@ -200,11 +196,6 @@ return {
       }
     end,
   },
-
-  {
-    "simrat39/symbols-outline.nvim",
-    config = function() require("symbols-outline").setup() end,
-  },
   {
     "stevearc/aerial.nvim", -- code outline
     config = function()
@@ -237,10 +228,10 @@ return {
     "rmagatti/goto-preview",
     config = function()
       require("goto-preview").setup {
-        width = 120,          -- Width of the floating window
-        height = 25,          -- Height of the floating window
-        debug = false,        -- Print debug information
-        opacity = nil,        -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        width = 120, -- Width of the floating window
+        height = 25, -- Height of the floating window
+        debug = false, -- Print debug information
+        opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
         post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
       }
     end,
@@ -381,14 +372,14 @@ return {
       require("neoscroll").setup {
         -- All these keys will be mapped to their corresponding default scrolling animation
         mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
-        hide_cursor = true,          -- Hide cursor while scrolling
-        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+        hide_cursor = true, -- Hide cursor while scrolling
+        stop_eof = true, -- Stop at <EOF> when scrolling downwards
         use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+        respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
         cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-        easing_function = nil,       -- Default easing function
-        pre_hook = nil,              -- Function to run before the scrolling animation starts
-        post_hook = nil,             -- Function to run after the scrolling animation ends
+        easing_function = nil, -- Default easing function
+        pre_hook = nil, -- Function to run before the scrolling animation starts
+        post_hook = nil, -- Function to run after the scrolling animation ends
       }
     end,
   },
