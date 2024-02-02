@@ -96,7 +96,8 @@ return {
 
     -- Other PLugins
     ["<leader>rc"] = { ":lua require('ror.commands').list_commands()<CR>" },
-    ["<leader>a"] = { "<cmd>AerialToggle<CR>" },
+    -- ["<leader>a"] = { "<cmd>AerialToggle<CR>" },
+    ["<leader>a"] = { "<cmd>Outline<CR>" },
     ["<leader>st"] = { "<cmd>TodoTelescope<CR>", desc = "Search all project Todos" },
     ["<C-\\>"] = {
       "<cmd>ToggleTerm direction=float start_in_insert=true insert_mappings=true<cr>",

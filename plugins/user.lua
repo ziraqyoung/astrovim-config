@@ -197,19 +197,31 @@ return {
     end,
   },
   {
-    "stevearc/aerial.nvim", -- code outline
+    "hedyhli/outline.nvim",
+    cmd = { "Outline", "OutlineOpen" },
     config = function()
-      require("aerial").setup {
-        layout = {
-          default_direction = "prefer_left",
+      require("outline").setup {
+        outline_window = {
+          position = "left",
+          width = 15,
         },
-        on_attach = function(bufnr)
-          vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-          vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
-        end,
       }
     end,
   },
+  -- { -- Errors on JS Files
+  --   "stevearc/aerial.nvim", -- code outline
+  --   config = function()
+  --     require("aerial").setup {
+  --       layout = {
+  --         default_direction = "prefer_left",
+  --       },
+  --       on_attach = function(bufnr)
+  --         vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+  --         vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+  --       end,
+  --     }
+  --   end,
+  -- },
   {
     "j-hui/fidget.nvim",
     config = function() require("fidget").setup() end,
@@ -304,7 +316,8 @@ return {
   },
   {
     "RRethy/nvim-treesitter-endwise",
-    ft = { "ruby", "eruby" },
+    -- ft = { "ruby", "lua", "vimscript" },
+    event = "InsertEnter",
     config = function()
       require("nvim-treesitter.configs").setup {
         endwise = {
@@ -312,6 +325,12 @@ return {
         },
       }
     end,
+  },
+  {
+    "m-demare/hlargs.nvim",
+    event = "BufReadPre",
+    config = function() require("hlargs").setup() end,
+    dependencies = "nvim-treesitter/nvim-treesitter",
   },
   {
     "tpope/vim-haml",
