@@ -43,15 +43,15 @@ return {
     ["gK"] = { "<cmd>lua require('hover').hover_select()<cr>", desc = "hover.nvim(select)" },
     ["gd"] = {
       function() require("telescope.builtin").lsp_definitions() end,
-      desc = "lsp references",
+      desc = "Lsp definitions",
     },
     ["gD"] = {
       function() require("telescope.builtin").lsp_type_definitions() end,
-      desc = "lsp references",
+      desc = "Lsp type references",
     },
     ["gr"] = {
       function() require("telescope.builtin").lsp_references() end,
-      desc = "lsp references",
+      desc = "Lsp references",
     },
     ["gi"] = {
       function() require("telescope.builtin").lsp_implementations() end,
@@ -142,6 +142,10 @@ return {
     ["<leader>gd"] = {
       "<cmd>Gitsigns diffthis HEAD<cr>",
       desc = "Git Diff",
+    },
+    ["<leader>gD"] = {
+      "<cmd>DiffviewFileHistory %<cr>",
+      desc = "Diff file (diffview.nvim)",
     },
   },
 
