@@ -82,4 +82,5 @@ return {
       height_ratio = 0.8,
     }
   },
+  { import = "astrocommunity.editing-support.todo-comments-nvim" },
 }
