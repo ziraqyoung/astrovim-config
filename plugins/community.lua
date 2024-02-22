@@ -34,7 +34,7 @@ return {
   -- Enhancements
   { import = "astrocommunity.indent.mini-indentscope" },
   {
-  "echasnovski/mini.indentscope",
+    "echasnovski/mini.indentscope",
     opts = { symbol = "╎", options = { try_as_border = false, indent_at_cursor = true } },
   },
   { import = "astrocommunity.project.nvim-spectre" },
@@ -71,6 +71,12 @@ return {
     },
   },
   { import = "astrocommunity.file-explorer.oil-nvim" },
+  {
+    "oil.nvim",
+    opts = {
+      default_file_explorer = false,
+    },
+  },
   { import = "astrocommunity.motion.vim-matchup" },
   { import = "astrocommunity.markdown-and-latex.glow-nvim" },
   {
@@ -80,7 +86,7 @@ return {
       height = 150,
       width_ratio = 0.9, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
       height_ratio = 0.8,
-    }
+    },
   },
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
 }
