@@ -295,10 +295,6 @@ return {
     config = function() require("lsp_signature").on_attach() end,
   },
   {
-    "felipec/vim-sanegx",
-    event = "BufRead",
-  },
-  {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -412,17 +408,6 @@ return {
       vim.api.nvim_command "autocmd InsertEnter * let b:cursorword = 0"
       vim.api.nvim_command "autocmd InsertLeave * let b:cursorword = 1"
       vim.api.nvim_command "augroup END"
-    end,
-  },
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    lazy = true,
-    config = function()
-      require("persistence").setup {
-        dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
-        options = { "buffers", "curdir", "tabpages", "winsize" },
-      }
     end,
   },
   {

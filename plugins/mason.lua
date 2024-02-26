@@ -7,10 +7,14 @@ return {
     opts = function(_, opts)
       -- add more things to the ensure_installed table protecting against community packs modifying it
       opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
-        "html", "cssls",
+        "html",
+        "cssls",
         "ruby_ls", -- laggy as fuck
         "solargraph",
-        "bashls", "stimulus_ls", "tailwindcss",
+        "bashls",
+        "stimulus_ls",
+        "tailwindcss",
+        "lemminx",
         -- "lua_ls",
       })
     end,
@@ -25,6 +29,9 @@ return {
         "emmet-language-server",
         "htmlbeautifier",
         "erb_lint",
+        "xmlformatter",
+        "dprint",
+        "lwc-language-server",
         -- 'ruby_lsp'
         -- "prettier",
         -- "stylua",
@@ -37,7 +44,7 @@ return {
     opts = function(_, opts)
       -- add more things to the ensure_installed table protecting against community packs modifying it
       opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
-        "ruby" -- (specified in ruby-pack)
+        "ruby", -- (specified in ruby-pack)
         -- "python",
       })
     end,
