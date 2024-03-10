@@ -157,7 +157,13 @@ return {
   },
   -- Other plugins
   {
+    "brenoprata10/nvim-highlight-colors",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
     "ellisonleao/dotenv.nvim",
+    event = "VeryLazy",
     config = function() require("dotenv").setup() end,
   },
 
@@ -248,24 +254,6 @@ return {
         },
       }
     end,
-  },
-  -- { -- Errors on JS Files
-  --   "stevearc/aerial.nvim", -- code outline
-  --   config = function()
-  --     require("aerial").setup {
-  --       layout = {
-  --         default_direction = "prefer_left",
-  --       },
-  --       on_attach = function(bufnr)
-  --         vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-  --         vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
-  --       end,
-  --     }
-  --   end,
-  -- },
-  {
-    "j-hui/fidget.nvim",
-    config = function() require("fidget").setup() end,
   },
   -- TreeSitter plugins
   {

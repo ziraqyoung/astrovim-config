@@ -31,8 +31,17 @@ return {
       }
       opts.window.position = "right"
       return opts
-    end
+    end,
   },
+  {
+    "stevearc/aerial.nvim",
+    opts = function(_, opts)
+      opts.layout.default_direction = "prefer_left"
+
+      return opts
+    end,
+  },
+
   {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
@@ -40,7 +49,7 @@ return {
       opts.statusline[4] = status.component.file_info { filename = { modify = ":." } }
 
       return opts
-    end
+    end,
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -74,6 +83,6 @@ return {
       end
 
       return opts
-    end
+    end,
   },
 }
