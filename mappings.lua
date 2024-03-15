@@ -112,7 +112,7 @@ return {
     ["<leader>xi"] = { "<cmd>TroubleToggle lsp_implementations<cr>", desc = "LSP implementations" },
 
     -- Dropbar
-    ["<leader>tt"] = { "<cmd>lua require('dropbar.api').pick()<cr>", desc = "Dropbar menu" },
+    ["<leader>tT"] = { "<cmd>lua require('dropbar.api').pick()<cr>", desc = "Dropbar menu" },
 
     -- Mini.files
     ["<leader>mf"] = {

@@ -88,5 +88,6 @@ return {
       height_ratio = 0.8,
     },
   },
+  { import = "astrocommunity.color.headlines-nvim" },
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
 }
